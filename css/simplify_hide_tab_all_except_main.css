@@ -1,0 +1,12 @@
+.CMSMain #right .tabstrip, 
+.CMSMain #right form #Root_Content_set .tabstrip {
+	display: none !important;
+}
+
+.CMSMain #right form div.tab {
+	padding: 0;
+	background-color: inherit;
+	border: none;
+	
+}
+

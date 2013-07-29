@@ -1,0 +1,8 @@
+#top {
+	display: none ! important;
+}
+
+#left, 
+#right {
+	top: 0;
+}
