@@ -79,10 +79,12 @@ class SimplifyLeftAndMainDecorator extends LeftAndMainExtension {
 
 		//only apply Simplify perms is they're not disabled
 		if (!SimplifyPermission::check("SIMPLIFY_DISABLED")) {
-			
+
+            $permissionProvider = new SimplifyPermissionProvider();
+
 			//check default permissions
 			self::checkPermissions(
-				SimplifyPermissionProvider::providePermissions(), 
+                $permissionProvider->providePermissions(),
 				'simplify/css/', 
 				'simplify/javascript/'
 			);

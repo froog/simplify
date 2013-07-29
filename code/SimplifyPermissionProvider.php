@@ -68,7 +68,7 @@ class SimplifyPermissionProvider implements PermissionProvider {
 	 *
 	 * @return array customPermissions list of custom permissions
 	 */
-	function getCustomPermissions() {
+	public static function getCustomPermissions() {
   		return self::$custom_permissions;
   	}
 
@@ -77,7 +77,7 @@ class SimplifyPermissionProvider implements PermissionProvider {
 	 *
 	 * @return string customCSSPath the custom CSS path
 	 */
-	function getCustomCSSPath() {
+    public static function getCustomCSSPath() {
 		return self::$custom_css_path;
 	}
 
@@ -85,8 +85,8 @@ class SimplifyPermissionProvider implements PermissionProvider {
 	 * Get the custom javascript path
 	 *
 	 * @return string customJSPath the custom JS path
-	 */	
-	function getCustomJSPath() {
+	 */
+    public static function getCustomJSPath() {
 		return self::$custom_js_path;
 	}  
 
@@ -176,16 +176,13 @@ class SimplifyPermissionProvider implements PermissionProvider {
 	 * Returns a list of all default Simplify & custom permissions (flat, NOT extended)
 	 * @return array A list of all default Simplify & custom permissions
 	 */   
-  function providePermissions() {
-	
-	$permissions = array_merge( 
-		self::$custom_permissions, 
-		self::formatPermissions(self::mergedPermissions())
-	);
-	
-	return $permissions;
-	
-	
+    public function providePermissions() {
+        $permissions = array_merge(
+            self::$custom_permissions,
+            self::formatPermissions(self::mergedPermissions())
+        );
+
+        return $permissions;
   }
 }
 
