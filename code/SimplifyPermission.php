@@ -50,12 +50,12 @@ class SimplifyPermission extends DataObject {
 		//admin_implies_all=false needs to be set due to Simplifys inverted security model:
 		//By default Admin users can access everything, so check() would always return true.
 		//This way admins can use Simplify perms correctly
-		Permission::$admin_implies_all = false;
+        Config::inst()->update('Permission', 'admin_implies_all', false);
 		
 		$check =  Permission::check($code);
 		
 		//Reset this back - its a static on Permission, so would break normal permissions
-		Permission::$admin_implies_all = true;
+        Config::inst()->update('Permission', 'admin_implies_all', true);
 		
 		return $check; 
 	}
