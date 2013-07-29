@@ -14,7 +14,8 @@ It allows for finer grained control over the CMS than the default install.
 * Supports i18n of permission descriptions
 
 ##Requirements##
-* SilverStripe 2.3.1+
+ * SilverStripe 3.0.0+
+   (for older versions of SilverStripe, use release 0.0.8)
 
 ##Installation##
 * Manual: Extract the simplify folder into the top level of your site, and visit /dev/build?flush=all to rebuild the database.
