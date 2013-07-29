@@ -21,7 +21,7 @@ class SimplifyAction extends Controller {
 	public static function drawTree() {
 		//ID = Group Code
 		$groupCode = Director::urlParam("ID");
-		$group = DataObject::get_one("Group", "Code = '{$groupCode}'");
+		$group = DataObject::get_one("Group", "\"Code\" = '{$groupCode}'");
 		if ($group) {
 			return self::PageTree($group);
 		}
@@ -72,7 +72,7 @@ class SimplifyAction extends Controller {
 		$groupID = $id[1];
 		
 		//Does perm exist - deny if so 
-		$perm = DataObject::get_one("Permission", "Code='{$code}' AND GroupID={$groupID}");
+		$perm = DataObject::get_one("Permission", "\"Code\"='{$code}' AND \"GroupID\"={$groupID}");
 		if ($perm) {
 			$perm->delete();		
 		} else {

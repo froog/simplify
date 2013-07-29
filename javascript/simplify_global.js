@@ -17,6 +17,31 @@ Simplify = {
 		});
 	},
 
+	//Bind select/deselect buttons on page creation tab
+	PageCreationBind : function() {
+		$j('.simplifyPageCreationAll').live("click", function(e) {
+			$j(this).parent().find('.checkbox input').each(function(obj){
+				//toggle server side perm if it was unset
+				if (!$j(this).attr('checked')) {
+					Simplify.PermissionToggle(this);
+				}
+				$j(this).attr('checked', true);
+			});
+			e.preventDefault();
+		});
+		
+		$j('.simplifyPageCreationNone').live("click", function(e) {
+			$j(this).parent().find('.checkbox input').each(function(obj){
+				//toggle server side perm if it was set
+				if ($j(this).attr('checked')) {
+					Simplify.PermissionToggle(this);
+				}
+				$j(this).attr('checked', false);
+			});
+			e.preventDefault();
+		});				
+	},
+
 	TreeActivatorHook : function() {
 		$j('#TreeActivator input').click(function() {
 			Simplify.TreeActivator();
@@ -91,6 +116,7 @@ Simplify = {
 */	
 
 Simplify.SimplifyHtmlReset();	
+Simplify.PageCreationBind();
 	
 })
 
