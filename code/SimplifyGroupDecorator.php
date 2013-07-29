@@ -6,7 +6,7 @@
  * 
  * @package simplify
  */
-class SimplifyGroupDecorator extends DataObjectDecorator {
+class SimplifyGroupDecorator extends DataExtension {
 
 	static $db = array(
 		"HTMLEditorLine1" => "Text",
@@ -23,10 +23,10 @@ class SimplifyGroupDecorator extends DataObjectDecorator {
 		1 => array('bold','italic','underline','strikethrough','separator','justifyleft','justifycenter','justifyright','justifyfull','styleselect','formatselect','separator','bullist','numlist','outdent','indent','blockquote','hr','charmap'),
 		2 => array('undo','redo','separator','cut','copy','paste','pastetext','pasteword','spellchecker','separator','ssimage','ssflash','sslink','unlink','anchor','separator','advcode','search','replace','selectall','visualaid','separator'),
 		3 => array('tablecontrols')
-	);	
+	);
 
-	
-	function extraStatics() {
+
+    public function extraStatics($class = null, $extension = null) {
 		return array(
 			"db" => self::$db
 		);
@@ -36,14 +36,14 @@ class SimplifyGroupDecorator extends DataObjectDecorator {
 	 * Set defaults if initial load (on ALL groups) 
 	 */
 	public static function set_html_editor_defaults() {
-		if (DataObject::get_one("Group", "SimplifyDefaultsLoaded = 0")) {
+		if (DataObject::get_one("Group", "\"SimplifyDefaultsLoaded\" = 0")) {
 			$line = implode(",", self::$editor_buttons[1]);
-			DB::query("update `Group` set `HTMLEditorLine1` = '{$line}'");
+			DB::query("update \"Group\" set \"HTMLEditorLine1\" = '{$line}'");
 			$line = implode(",", self::$editor_buttons[2]);
-			DB::query("update `Group` set `HTMLEditorLine2` = '{$line}'");
+			DB::query("update \"Group\" set \"HTMLEditorLine2\" = '{$line}'");
 			$line = implode(",", self::$editor_buttons[3]);
-			DB::query("update `Group` set `HTMLEditorLine3` = '{$line}'");
-			DB::query("update `Group` set `SimplifyDefaultsLoaded` = 1");						
+			DB::query("update \"Group\" set \"HTMLEditorLine3\" = '{$line}'");
+			DB::query("update \"Group\" set \"SimplifyDefaultsLoaded\" = 1");						
 		}
 	}
 
@@ -57,8 +57,9 @@ class SimplifyGroupDecorator extends DataObjectDecorator {
 	 * 
 	 * @param FieldSet $fields	List of CMS fields to update 
 	 */
-	function updateCMSFields(FieldSet &$fields) {
-		if ($this->owner->class == "Group") {
+    public function updateCMSFields(FieldList $fields) {
+
+        if ($this->owner->class == "Group") {
 			
 			//print_r($this->owner->Permissions());
 			
@@ -84,7 +85,7 @@ class SimplifyGroupDecorator extends DataObjectDecorator {
 				
 				foreach ($grouping as $code => $label) {
 					//See if perm exists
-					$perm = DataObject::get_one("Permission", "Code='{$code}' AND GroupID={$groupID}");
+					$perm = DataObject::get_one("Permission", "\"Code\"='{$code}' AND \"GroupID\"={$groupID}");
 					$setChecked = "";
 					if ($perm) { 
 						$checked = 1;
@@ -98,7 +99,7 @@ class SimplifyGroupDecorator extends DataObjectDecorator {
 					
 					$fields->addFieldToTab("Root.Simplify.{$tab}", new LiteralField(
 						$code."|".$groupID,
-						"<p id='{$code}|{$groupID}' class='field checkbox'>
+						"<p id='{$code}|{$groupID}' class='checkbox'>
 							<input type='checkbox' value='1' {$setChecked} name='{$code}' onclick='Simplify.PermissionToggle(this)'/>
 							<label class='right' for='{$code}'>{$label}</label>							
 						</p>"
@@ -122,6 +123,14 @@ class SimplifyGroupDecorator extends DataObjectDecorator {
 					<p><button class='simplifyHtmlDefaults action' type='button'>Reset to defaults</button></p>										
 					")
 			));
+
+			//Add select/deselect all to Page Creation
+			$pageCreation = $fields->findOrMakeTab("Root.Simplify.PageCreation");
+			$firstField = $pageCreation->Fields()->First();
+			$fields->addFieldToTab("Root.Simplify.PageCreation", 
+									new LiteralField("SelectDeselect", "<button class='simplifyPageCreationAll'>Select all</button><button class='simplifyPageCreationNone'>Deselect all</button>"),
+									$firstField->getName()
+			);			
 			
 			
 			//TODO - these are future niceities..impl them!

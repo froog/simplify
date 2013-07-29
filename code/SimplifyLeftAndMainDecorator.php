@@ -7,7 +7,7 @@
  * 
  * @package simplify
  */
-class SimplifyLeftAndMainDecorator extends LeftAndMainDecorator {
+class SimplifyLeftAndMainDecorator extends LeftAndMainExtension {
 	
 	private static $js_files = array();
 	private static $css_files = array();
@@ -49,19 +49,26 @@ class SimplifyLeftAndMainDecorator extends LeftAndMainDecorator {
 	 */
 	function alternateAccessCheck() {
 		//add global js + css required by Simplify - these aren't permissions, just support code
-		$treeJS = "simplify/javascript/simplify_multiselect_tree.js";
-		$globalJS = "simplify/javascript/simplify_global.js";
-		LeftAndMain::require_javascript($treeJS);
-		LeftAndMain::require_javascript($globalJS);
 
-		self::$js_files[] = $treeJS;
+        //DEPREACATED?
+        //TODO - what does/did this do? No longer works with new 3.x JS
+        // Look at simplify_global to see use of MultiselecttreeFIX
+        //$treeJS = "simplify/javascript/simplify_multiselect_tree.js";
+		//LeftAndMain::require_javascript($treeJS);
+        //self::$js_files[] = $treeJS;
+
+        $globalJS = "simplify/javascript/simplify_global.js";
+        LeftAndMain::require_javascript($globalJS);
+
 		self::$js_files[] = $globalJS;
 
+		//TODO -BUG FIX ME - uses old JS, need to fix this to work with new 3.x CMS JS
 		//Block the JS file used to perform Permission/Full admin rights toggle - replace it with our own
-		Requirements::block(SAPPHIRE_DIR . '/javascript/PermissionCheckboxSetField.js');
+		/*Requirements::block(SAPPHIRE_DIR . '/javascript/PermissionCheckboxSetField.js');
 		$checkboxJS = "simplify/javascript/simplify_PermissionCheckboxSetField.js";
 		LeftAndMain::require_javascript($checkboxJS);
 		self::$js_files[] = $checkboxJS;
+		*/
 		
 		$globalCSS = "simplify/css/simplify_global.css";
 		LeftAndMain::require_css($globalCSS);
@@ -118,7 +125,7 @@ class SimplifyLeftAndMainDecorator extends LeftAndMainDecorator {
 			$groupCSV = implode(", ", $groupList);
 	
 			$perms = DataObject::get("Permission", 
-				"Code like 'SIMPLIFY_NO_CREATE_%' AND GroupID IN ($groupCSV)");
+				"\"Code\" like 'SIMPLIFY_NO_CREATE_%' AND \"GroupID\" IN ($groupCSV)");
 
 			if ($perms) {
 				foreach($perms as $perm) {

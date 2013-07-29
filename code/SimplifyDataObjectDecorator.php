@@ -6,10 +6,10 @@
  * 
  * @package simplify
  */
-class SimplifyDataObjectDecorator extends SiteTreeDecorator {
+class SimplifyDataObjectDecorator extends SiteTreeExtension {
 
-	
-	function extraStatics() {
+
+    public function extraStatics($class = null, $extension = null) {
 		return array(
 			"many_many" => array (
 				"SimplifyHideDeleteGroups" => "Group",
@@ -19,8 +19,8 @@ class SimplifyDataObjectDecorator extends SiteTreeDecorator {
 	}
 
 
-	
-	function updateCMSActions(FieldSet &$actions) {
+
+    public function updateCMSActions(FieldList $actions) {
 		
 		//Remove delete and/or unpublish buttons if set for this users group
 		// Do this by getting the list of Groups set in the Access  tab, looping through
@@ -41,17 +41,23 @@ class SimplifyDataObjectDecorator extends SiteTreeDecorator {
 			}
 		}		
 	}
-	
 
-	function updateCMSFields(FieldSet &$fields) {
-		//Add extra fields to Access tab to hide action buttons
-		$fields->addFieldsToTab("Root.Access", array(
-			new HeaderField('SimplifyHideDelete',_t('Smplify.HIDEDELETEHEADER', "Simplify - Hide Delete button from these users"), 2),
-			new TreeMultiselectField("SimplifyHideDeleteGroups", 'Hide Delete Groups'),
-			new HeaderField('SimplifyHideUnpublish',_t('Smplify.HIDEUNPUBLISHHEADER', "Simplify - Hide Unpublish button from these users"), 2),
-			new TreeMultiselectField("SimplifyHideUnpublishGroups", 'Hide Unpublish Groups')			
-		));
-		
+    public function updateSettingsFields(FieldList $fields) {
+        //Add extra fields to Settings tab to hide action buttons
+        $fields->addFieldsToTab("Root.Settings", array(
+            new HeaderField('SimplifyHideDelete',_t('Smplify.HIDEDELETEHEADER', "Simplify - Hide Delete button from these users"), 2),
+            new TreeMultiselectField("SimplifyHideDeleteGroups", 'Hide Delete Groups'),
+            new HeaderField('SimplifyHideUnpublish',_t('Smplify.HIDEUNPUBLISHHEADER', "Simplify - Hide Unpublish button from these users"), 2),
+            new TreeMultiselectField("SimplifyHideUnpublishGroups", 'Hide Unpublish Groups')
+        ));
+
+    }
+
+
+    public function updateCMSFields(FieldList $fields) {
+
+//DEPRECATED - this was a bug fix, no longer needed??
+/*
 		//Get the list of options for the Page Type dropdown ("ClassName")
 		$classList = $fields->dataFieldByName("ClassName")->getSource();
 		
@@ -59,7 +65,9 @@ class SimplifyDataObjectDecorator extends SiteTreeDecorator {
 		//SimplifyCMSMainDecorator may remove it
 		$classList[$this->owner->class] = $this->owner->i18n_singular_name();
 		$fields->dataFieldByName("ClassName")->setSource($classList);
-		
+*/
+
+
 		//Only remove fields if remove is enabled and Simplify isn't disabled
 		if (SimplifyPermissionProvider::getRemoveEnabled() && !SimplifyPermission::check("SIMPLIFY_DISABLED")) {
 			
@@ -103,7 +111,7 @@ class SimplifyDataObjectDecorator extends SiteTreeDecorator {
 		//Hide pages that have been selected in the top level of the Simplify fields tree -
 		//These will be where the field = page, ie; HidePage = HideName
 		$hideThisPage = DataObject::get("SimplifyPermission", 
-			"HidePage = HideName AND HidePage = '{$this->owner->class}'");
+			"\"HidePage\" = \"HideName\" AND \"HidePage\" = '{$this->owner->class}'");
 			
 		if ($hideThisPage) {
 			$classes .= " hide";

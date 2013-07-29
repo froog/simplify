@@ -19,12 +19,7 @@ class SimplifyPermissionProvider implements PermissionProvider {
 			  "SIMPLIFY_DISABLED" => "Disable all Simplify permissions",
 			  "SIMPLIFY_HIDE_HELP" => "Hide the Help menu",
 			  "SIMPLIFY_HIDE_LOGO" => "Hide the logo",
-			  "SIMPLIFY_HIDE_HEADER" => "Hide the header",
-			  "SIMPLIFY_HIDE_FOOTER" => "Hide the footer",
-			  "SIMPLIFY_HIDE_DRAFT" => "Hide the Draft Site link", 
-			  "SIMPLIFY_HIDE_PUBLISHED" => "Hide the Published Site link",
-			  "SIMPLIFY_HIDE_VERSION" => "Hide the version and link on footer",
-			  "SIMPLIFY_HIDE_PROFILE" => "Hide the Profile link"
+			  "SIMPLIFY_HIDE_PREVIEW" => "Hide the Preview button",
 		  ),
 		  
 		  "Tree" => array(

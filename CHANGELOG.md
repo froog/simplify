@@ -40,3 +40,7 @@ Simplify ChangeLog
  - Fixed SimplifyGroupDecorator to not apply perms if Simplify disabled
  - Now with SS 2.4 support
  - Permissions now toggled in Permissions tab if changed in Simplify tab
+ 
+1.0.0
+ - Postgresl support
+ - If classes are removed and still have perms they won't error

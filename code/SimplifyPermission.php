@@ -34,8 +34,8 @@ class SimplifyPermission extends DataObject {
 		$groupCSV = implode(", ", $groupList);
 
 		$perms = DataObject::get("SimplifyPermission", 
-			"HidePage='".$page."'  
-			 AND GroupID IN ($groupCSV)");
+			"\"HidePage\"='".$page."'  
+			 AND \"GroupID\" IN ($groupCSV)");
 			 
 		return $perms;
 	}
@@ -79,8 +79,8 @@ class SimplifyPermission extends DataObject {
 			}
 			
 			return DataObject::get_one("SimplifyPermission", 
-				"HidePage = '{$page}' AND HideName = '{$field}' AND " .
-				"HideType = '{$type}' AND GroupID = '{$groupId}'");
+				"\"HidePage\" = '{$page}' AND \"HideName\" = '{$field}' AND " .
+				"\"HideType\" = '{$type}' AND \"GroupID\" = '{$groupId}'");
 		} else {
 			return false;
 		}
