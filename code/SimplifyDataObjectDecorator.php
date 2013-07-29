@@ -8,17 +8,10 @@
  */
 class SimplifyDataObjectDecorator extends SiteTreeExtension {
 
-
-    public function extraStatics($class = null, $extension = null) {
-		return array(
-			"many_many" => array (
-				"SimplifyHideDeleteGroups" => "Group",
-				"SimplifyHideUnpublishGroups" => "Group"
-			)
-		);
-	}
-
-
+    static $many_many = array (
+        "SimplifyHideDeleteGroups" => "Group",
+        "SimplifyHideUnpublishGroups" => "Group"
+    );
 
     public function updateCMSActions(FieldList $actions) {
 		

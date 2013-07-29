@@ -25,13 +25,6 @@ class SimplifyGroupDecorator extends DataExtension {
 		3 => array('tablecontrols')
 	);
 
-
-    public function extraStatics($class = null, $extension = null) {
-		return array(
-			"db" => self::$db
-		);
-	}
-	
 	/**
 	 * Set defaults if initial load (on ALL groups) 
 	 */
