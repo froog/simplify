@@ -113,7 +113,7 @@ class SimplifyPermissionProvider implements PermissionProvider {
   }
   
   //Merges default and any other extended permissions
-  function mergedPermissions() {
+  public static function mergedPermissions() {
   	$permissions = array_merge( 
 		self::$default_permissions,
 		//TODO: Can't impl this until there is an easy way to override SiteTreeFilterPageTypeField in CMSMain.php
@@ -125,7 +125,7 @@ class SimplifyPermissionProvider implements PermissionProvider {
   
   //Converts a list of extended permissions into a flat key => value array
   //with Simplify identifier and grouping title
-  function formatPermissions($permissions) {
+  public static function formatPermissions($permissions) {
 	//For SS v2.4.0 and greater, return an array with a category for new Permission style,
 	//for older version, just text
 	//no easy way to determine version..so use existance of sort_permissions method in 2.4.0 only
@@ -151,7 +151,7 @@ class SimplifyPermissionProvider implements PermissionProvider {
   }
   
  //Loop through all page types to create list of extended permissions for disabling creation
-  function pageCreationPermissions() {
+  public static function pageCreationPermissions() {
 	$pageCreation = array(
 		"Page Creation" => array()
 	);
