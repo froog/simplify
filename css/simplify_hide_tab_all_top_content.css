@@ -1,0 +1,13 @@
+.CMSMain #right .tabstrip {
+	display: none !important;
+}
+
+.CMSMain #right #Root_Content_set .tabstrip {
+	display: block !important;
+}
+
+.CMSMain #right #Root_Content_set {
+	background-color: inherit;
+	border: none;
+}
+

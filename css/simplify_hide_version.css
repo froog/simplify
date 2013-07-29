@@ -1,0 +1,9 @@
+#logInStatus a,
+#logInStatus abbr {
+	display: none;
+}
+
+#logInStatus #EditMemberProfile,
+#logInStatus #LogoutLink{
+	display: inline
+}

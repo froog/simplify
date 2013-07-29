@@ -1,0 +1,43 @@
+ul#perm-tree {
+	margin-left: 10px;
+}
+
+ul#perm-tree li.tree-page {
+	background: transparent url(../images/page-icon.gif) 32px 2px no-repeat;
+}
+
+ul.tree li.tree-tabset {
+	background: transparent url(../images/tabset-icon.gif) 32px 2px no-repeat;
+}
+
+ul.tree li.tree-tab,
+ul.tree li.tree-tab.last {
+	background: transparent url(../images/tab-icon.gif) 32px 2px no-repeat;
+}
+
+ul.tree li.tree-field {
+	background: transparent url(../images/field-icon.gif) 32px 2px no-repeat;
+}	
+
+ul#perm-tree a {
+	padding-left: 36px;
+}
+
+ul#perm-tree .filefolderhover span.a, 
+ul#perm-tree span.a.over {
+	background: none ! important;
+	color: red;
+}
+
+
+ul#perm-tree li a:hover {
+	color: red;
+}
+
+.tree-loading {
+	background: transparent url(../images/loading.gif) 150px 0 no-repeat;
+}
+
+.tree li.hide {
+	display: none;
+}
