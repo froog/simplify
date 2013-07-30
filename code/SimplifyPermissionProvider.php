@@ -18,29 +18,18 @@ class SimplifyPermissionProvider implements PermissionProvider {
 		  "Global" => array(
 			  "SIMPLIFY_DISABLED" => "Disable all Simplify permissions",
 			  "SIMPLIFY_HIDE_HELP" => "Hide the Help menu",
-			  "SIMPLIFY_HIDE_LOGO" => "Hide the logo",
-			  "SIMPLIFY_HIDE_PREVIEW" => "Hide the Preview button",
+			  "SIMPLIFY_HIDE_LOGO" => "Hide the logo"
 		  ),
 		  
-		  "Tree" => array(
+		  "Pages Tree" => array(
 		  	  "SIMPLIFY_HIDE_NON_EDIT_PAGES" => "Hide pages this group cannot view or edit",
-			  "SIMPLIFY_HIDE_CREATE" => "Hide the Create button",
-			  "SIMPLIFY_HIDE_SEARCH" => "Hide the Search button",
-			  "SIMPLIFY_HIDE_BATCH_ACTIONS" => "Hide the Batch Actions button",
-			  "SIMPLIFY_SHOW_CREATE_OPEN" => "Show Create page dialog by default",
-			  "SIMPLIFY_HIDE_TREE_OPTIONS" => "Hide all tree checkboxes",
-	  		  "SIMPLIFY_DRAGGABLE_ON" => "Turn on drag & drop reordering by default",
-			  "SIMPLIFY_HIDE_DRAGGABLE" => "Hide the drag & drop reordering checkbox"
+              "SIMPLIFY_HIDE_EDIt_TREE" => "Hide the Edit Tree button",
+              "SIMPLIFY_HIDE_ADD_NEW" => "Hide the Add New button",
+			  "SIMPLIFY_HIDE_MULTI_SELECTION" => "Hide the Multi-selection button",
+			  "SIMPLIFY_HIDE_FILTER" => "Hide the Filter panel",
+	  		  "SIMPLIFY_DRAGGABLE_OFF" => "NOT IMPLEMENTED: Turn off drag & drop reordering",
 		  ),
-		  
-		  "Tree Pane" => array (
-			  "SIMPLIFY_HIDE_PANE_SITETREE" => "Hide Site Content and Structure",
-			  "SIMPLIFY_HIDE_HEADING_SITETREE" => "Hide the heading Site Content and Structure",
-			  "SIMPLIFY_HIDE_PANE_KEY" => "Hide the tree Key",
-			  "SIMPLIFY_HIDE_PANE_VERSIONS" => "Hide Page Version History",
-			  "SIMPLIFY_HIDE_PANE_REPORTS" => "Hide Site Reports"
-		  ),
-		  
+
 		  "Security" => array (
 		  	"SIMPLIFY_SECURITY_HIDE_CREATE" => "Hide the Create group button",
 			"SIMPLIFY_SECURITY_HIDE_DELETE" => "Hide the Delete group button",
@@ -104,11 +93,11 @@ class SimplifyPermissionProvider implements PermissionProvider {
 	self::$custom_js_path = $customJSPath;
   }
   
-  function getRemoveEnabled() {
+  public static function getRemoveEnabled() {
   	return self::$removeEnabled;
   }
   
-  function setRemoveEnabled($removeEnabled) {
+  public static function setRemoveEnabled($removeEnabled) {
   	self::$removeEnabled = $removeEnabled;
   }
   
@@ -158,13 +147,15 @@ class SimplifyPermissionProvider implements PermissionProvider {
 	
 	//Get all the page types
 	//(Not done with SiteTree::page_type_classes as this will remove already hidden pages)
-	$classes = ClassInfo::getValidSubClasses();
-	array_shift($classes);
+	$classes = ClassInfo::getValidSubClasses("SiteTree");
 
 	foreach($classes as $class) {
-		$code = "SIMPLIFY_NO_CREATE_" . $class;
-		$label = "Hide create " . $class;
-		$pageCreation["Page Creation"][$code] = $label;
+        //Exclude SiteTree from the list
+        if ($class != "SiteTree") {
+            $code = "SIMPLIFY_NO_CREATE_" . $class;
+            $label = "Hide create " . $class;
+            $pageCreation["Page Creation"][$code] = $label;
+        }
 	}
 	
 	return $pageCreation;
