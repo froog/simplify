@@ -136,8 +136,8 @@ class SimplifyLeftAndMainDecorator extends LeftAndMainExtension {
 					
 					//This 'hack' uses the hide_ancestor static to remove itself
 					//See SiteTree::page_type_classes() for the call
-					Object::set_static($page, "hide_ancestor", $page);
-					
+                    Config::inst()->update($page, "hide_ancestor", $page);
+
 					//Note that this hides it from Behaviour/Page type which is bad - 
 					//SimplifyDataObjectDecorator updateCMSFields ensures it is set
 				} 
