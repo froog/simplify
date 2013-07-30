@@ -90,13 +90,7 @@ Simplify = {
 	},
 	
 	PermissionToggle : function(obj) {
-		//parent p id holds the permission code
-		//Do a simple AJAX get call to toggle it..
-		$j.get(
-			"admin/simplify/togglePermission/" + $j(obj).parent().attr('id')
-		);
-		
-		//Also ensure std perm is toggled too
+		//Ensure std perm is toggled
 		var stdPerm = $j("input[value='" + obj.name + "']");
 		stdPerm.attr('checked', !stdPerm.attr('checked'));
 	}
