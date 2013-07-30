@@ -7,20 +7,24 @@
  */
 class SimplifyAction extends Controller {
  
-	static $url_segment = 'simplify';
-	static $url_rule = '/$Action/$ID'; 
 	static $group = null;
-	
+
+    public static $allowed_actions = array(
+        "drawTree"
+    );
+
 	/**
 	 * url action function that calls PageTree with the given group
-	 * action: simplify/drawTree/ID action where ID is the group Code
+	 * action: SimplifyAction/drawTree/ID action where ID is the group Code
 	 * eg; simplify/drawTree/administrators
 	 * 
 	 * @return string A fully formatted tree as a HTML list
 	 */
-	public static function drawTree() {
+	public function drawTree() {
+
+		$params = $this->getURLParams();
 		//ID = Group Code
-		$groupCode = Director::urlParam("ID");
+		$groupCode = $params["ID"];
 		$group = DataObject::get_one("Group", "\"Code\" = '{$groupCode}'");
 		if ($group) {
 			return self::PageTree($group);
@@ -100,7 +104,7 @@ class SimplifyAction extends Controller {
 	 * TODO this is very slow - improve it!
 	 * TODO could load branches via AJAX instead
 	 */
-	public function getChildrenAsUL($fields, $level = 0, $ulExtraAttributes = null, $parentPage, &$itemCount = 0) {
+	public static function getChildrenAsUL($fields, $level = 0, $ulExtraAttributes = null, $parentPage, &$itemCount = 0) {
 		$output = "";
 		$hasNextLevel = false;
 		//Set to true to remove any node from being displayed. Its children still will be.

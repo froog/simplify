@@ -53,7 +53,7 @@ Simplify = {
 	
 			//load the tree via AJAX
 			$j('#TreeActivator').load(			
-				"admin/simplify/drawTree/" + $j('.simplifyGroupCode').val(),
+				"SimplifyAction/drawTree/" + $j('.simplifyGroupCode').val(),
 				"",
 				function() {
 					$j('#TreeActivator').removeClass('tree-loading');
@@ -78,7 +78,7 @@ Simplify = {
 						//this.rel holds the Page|Name|Group code for each Field permission
 						//Do a simple AJAX get call to toggle it..
 						$j.get(
-							"admin/simplify/toggleFieldPermission/" + this.rel
+							"SimplifyAction/toggleFieldPermission/" + this.rel
 						);
 					});	
 					
