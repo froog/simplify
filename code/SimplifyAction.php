@@ -59,28 +59,6 @@ class SimplifyAction extends Controller {
 	}
 
 	/**
-	 * url action function that toggles a given standard permission on or off
-	 * action: simplify/togglePermission/ID
-	 * where ID = Code|GroupID
-	 * eg; simplify/toggleFieldPermission/SIMPLIFY_HIDE_HELP|1
-	 * TODO: the pipe delimiting is rather eh. refactor.
-	 * 
-	 */	
-	public static function togglePermission() {
-		$id = explode("|", Director::urlParam("ID"));
-		$code = $id[0];
-		$groupID = $id[1];
-		
-		//Does perm exist - deny if so 
-		$perm = DataObject::get_one("Permission", "\"Code\"='{$code}' AND \"GroupID\"={$groupID}");
-		if ($perm) {
-			$perm->delete();		
-		} else {
-			Permission::grant($groupID, $code);
-		}
-	}
-		
-	/**
 	 *  Display a tree of all page types and their children, with perms
 	 *
 	 *  @param Group group show permissions related to this group
