@@ -19,7 +19,7 @@ It allows for finer grained control over the CMS than the default install.
 
 ##Installation##
 * Manual: Extract the simplify folder into the top level of your site, and visit /dev/build?flush=all to rebuild the database.
-* Composer/Packagist: TODO: Write this
+* Composer/Packagist: Install composer and then run `composer require froog/simplify dev-master`
 
 ##Quick start##
 * After installing Simplify, login to the admin interface as a full admin user
