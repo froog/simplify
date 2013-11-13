@@ -1,4 +1,4 @@
-simplify-silverstripe
+simplify
 =====================
 
 Simplify is a module for the open source SilverStripe CMS (www.silverstripe.org)
