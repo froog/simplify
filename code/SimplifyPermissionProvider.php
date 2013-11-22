@@ -116,25 +116,14 @@ class SimplifyPermissionProvider implements PermissionProvider {
   //Converts a list of extended permissions into a flat key => value array
   //with Simplify identifier and grouping title
   public static function formatPermissions($permissions) {
-	//For SS v2.4.0 and greater, return an array with a category for new Permission style,
-	//for older version, just text
-	//no easy way to determine version..so use existance of sort_permissions method in 2.4.0 only
-	//to detect version
-	//TODO: Use version instead (see SapphireInfo) (but requires extra parsing work)
-	$ver240 = method_exists(new Permission(), "sort_permissions");
-	
 	$formattedPerms = array();
 	foreach($permissions as $title => $grouping) {
 		foreach ($grouping as $code => $label) {
 
-			if ($ver240) {
-				$formattedPerms[$code] = array(
-					"category" => "Simplify - {$title}",
-					"name" => "{$label}"
-				);			
-			} else {
-				$formattedPerms[$code] = "Simplify - {$title} - {$label}";
-			}
+            $formattedPerms[$code] = array(
+                "category" => "Simplify - {$title}",
+                "name" => "{$label}"
+            );
 		}
 	}	
 	return $formattedPerms;
