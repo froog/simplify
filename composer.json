@@ -1,0 +1,19 @@
+{
+    "name": "froog/simplify",
+    "description": "Simplify adds fine grained, permission based control over the SilverStripe CMS",
+    "type": "silverstripe-module",
+    "keywords": ["silverstripe", "permissions", "cms", "member"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Daniel Pickering",
+            "email": "froogalicious@gmail.com"
+        }
+    ],
+
+    "require":
+    {
+	"silverstripe/cms": "~3.0",
+	"silverstripe/framework": "~3.0"
+    }
+}
