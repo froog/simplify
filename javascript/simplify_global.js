@@ -57,13 +57,12 @@ Simplify = {
 				"",
 				function() {
 					$j('#TreeActivator').removeClass('tree-loading');
-					
-					//make list a tree
-					behaveAs($('perm-tree'), Tree);
-					behaveAs($('perm-tree'), MultiselectTreeFIX);
-					
+                    $j('#TreeActivator').addClass('cms-tree jstree jstree-focused jstree-apple');
+
+                    $j('#TreeActivator').jstree();
+
 					//specific ver of the jsparty/tree/tree.js treeCloseAll func
-					var candidates = $('perm-tree').getElementsByTagName('li');
+					/*var candidates = $j('perm-tree').getElementsByTagName('li');
 	    			for (var i=0;i<candidates.length;i++) {
 	        			var aSpan = candidates[i].childNodes[0];
 	        			if(aSpan.childNodes[0] && aSpan.childNodes[0].className == "b") {
@@ -71,10 +70,10 @@ Simplify = {
 	               				aSpan.childNodes[0].onclick();
 	           				}
 	        			}
-	    			}
+	    			}*/
 					
 					// add toggle perm handling code
-					$j('#Root_Simplify_set #perm-tree a').click(function(){
+					$j('#Root_Simplify_set #TreeActivator a').click(function(){
 						//this.rel holds the Page|Name|Group code for each Field permission
 						//Do a simple AJAX get call to toggle it..
 						$j.get(

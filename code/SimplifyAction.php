@@ -113,7 +113,7 @@ class SimplifyAction extends Controller {
 		//Remove Root, as its not really needed and confuses this tree
 		if (is_a($fields, "FieldSet") && is_a($fields->First(), "TabSet")) {
 			$firstField = $fields->First();
-			$firstField = method_exists($firstField, "Name") ? $firstField->Name() : "";		
+			$firstField = method_exists($firstField, "getName") ? $firstField->getName() : "";
 			if ($firstField == "Root"){
 		 		$removeNode = true;
 			}
@@ -143,8 +143,8 @@ class SimplifyAction extends Controller {
 			if (is_a($field, "TabSet")) {
 				$css .= "tree-tabset ";
 				$recurse = true;
-				$display = method_exists($field, "Name") ? $field->Name() : $field->class;
-				$name = $display;
+				$display = method_exists($field, "getName") ? $field->getName() : $field->class;
+                $name = $display;
 				$children = $field->Tabs();	
 			} else
 			
@@ -152,7 +152,7 @@ class SimplifyAction extends Controller {
 			if(is_a($field, "Tab")) {
 				$css .= "tree-tab ";
 				$recurse = true;
-				$display = method_exists($field, "Name") ? $field->Name() : $field->class;
+				$display = method_exists($field, "getName") ? $field->getName() : $field->class;
 				$name = $display;
 				$children = $field->Fields();
 			} else
@@ -162,7 +162,7 @@ class SimplifyAction extends Controller {
 			//If the class has a Name, display that in brackets afterwards (maybe, comm for now)
 			if(is_subclass_of($field, "FormField") and !is_a($field, "LiteralField")) {
 				$title = method_exists($field, "Title") ? $field->Title() : $field->class;
-				$name =  method_exists($field, "Name") ? $field->Name() : $field->class;
+				$name =  method_exists($field, "getName") ? $field->getName() : $field->class;
 				if (!$title) {
 					$title = $field->class;
 				}
@@ -173,12 +173,12 @@ class SimplifyAction extends Controller {
 			//Handle LiteralField classes - the content is HTML, so convert to raw first
 			if(is_a($field, "LiteralField")) {
 				$css .= "tree-literal ";
-				$name =  method_exists($field, "Name") ? $field->Name() : $field->class;
+				$name =  method_exists($field, "getName") ? $field->getName() : $field->class;
 				$display = Convert::xml2raw($field->getContent());
 			} else { 
 			//If the item isn't any of the above classes, we don't know what it is...
 				$css .= "tree-unknown ";
-				$name = method_exists($field, "Name") ? $field->Name() : $field->class;
+				$name = method_exists($field, "getName") ? $field->getName() : $field->class;
 				$display = $field->class." is an unknown type...";
 			}
 
