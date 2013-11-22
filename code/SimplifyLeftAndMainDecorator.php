@@ -29,11 +29,11 @@ class SimplifyLeftAndMainDecorator extends LeftAndMainExtension {
 				if (SimplifyPermission::check($permission)) {
 					$cssFile = $cssPath.strtolower($permission).'.css';
 					$jsFile = $jsPath.strtolower($permission).'.js';
-			
-					LeftAndMain::require_css($cssFile);
+
+                    Requirements::css($cssFile);
 					self::$css_files[] = $cssFile;
 
-					LeftAndMain::require_javascript($jsFile);
+                    Requirements::javascript($jsFile);
 					self::$js_files[] = $jsFile;
 				}
 			}
@@ -41,13 +41,12 @@ class SimplifyLeftAndMainDecorator extends LeftAndMainExtension {
 	}
 
 	/**
-	 * alternateAccessCheck
-	 * Checks Simplify default and custom permission, also combines the CSS and JS. 
+	 * Checks Simplify default and custom permission, also combines the CSS and JS.
 	 * Called from LeftAndMain
 	 * 
 	 * @return null
 	 */
-	function alternateAccessCheck() {
+    function init() {
 		//add global js + css required by Simplify - these aren't permissions, just support code
 
         //DEPREACATED?
@@ -58,7 +57,7 @@ class SimplifyLeftAndMainDecorator extends LeftAndMainExtension {
         //self::$js_files[] = $treeJS;
 
         $globalJS = "simplify/javascript/simplify_global.js";
-        LeftAndMain::require_javascript($globalJS);
+        Requirements::javascript($globalJS);
 
 		self::$js_files[] = $globalJS;
 
@@ -71,7 +70,7 @@ class SimplifyLeftAndMainDecorator extends LeftAndMainExtension {
 		*/
 		
 		$globalCSS = "simplify/css/simplify_global.css";
-		LeftAndMain::require_css($globalCSS);
+		Requirements::css($globalCSS);
 		self::$css_files[] = $globalCSS;
 
 		//Set defaults if initial load (on ALL groups)

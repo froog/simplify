@@ -48,19 +48,6 @@ class SimplifyDataObjectDecorator extends SiteTreeExtension {
 
 
     public function updateCMSFields(FieldList $fields) {
-
-//DEPRECATED - this was a bug fix, no longer needed??
-/*
-		//Get the list of options for the Page Type dropdown ("ClassName")
-		$classList = $fields->dataFieldByName("ClassName")->getSource();
-		
-		//Ensure this decorated class is added to the dropdown(its the default) - this is because the code in 
-		//SimplifyCMSMainDecorator may remove it
-		$classList[$this->owner->class] = $this->owner->i18n_singular_name();
-		$fields->dataFieldByName("ClassName")->setSource($classList);
-*/
-
-
 		//Only remove fields if remove is enabled and Simplify isn't disabled
 		if (SimplifyPermissionProvider::getRemoveEnabled() && !SimplifyPermission::check("SIMPLIFY_DISABLED")) {
 			
