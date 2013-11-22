@@ -8,3 +8,22 @@ appendLoader(function() {
 });
 
 */
+
+(function($) {
+
+    $('.cms-tree').entwine({
+
+        onadd: function(){
+            this._super();
+
+            this.bind('before.jstree', function(e, data) {
+                if(data.func == 'start_drag') {
+                    //Stop drag n drop
+                    e.stopImmediatePropagation();
+                    return false;
+                }
+            });
+        }
+    });
+
+}(jQuery));

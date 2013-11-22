@@ -1,0 +1,3 @@
+.cms-tree.draggable a > .jstree-icon {
+    display: none ! important;
+}

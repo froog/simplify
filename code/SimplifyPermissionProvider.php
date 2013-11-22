@@ -22,13 +22,13 @@ class SimplifyPermissionProvider implements PermissionProvider {
 			  "SIMPLIFY_HIDE_SUBSITES_DROP" => "Hide the Subsites dropdown"
 		  ),
 		  
-		  "Pages Tree" => array(
+		  "Pages" => array(
 		  	  "SIMPLIFY_HIDE_NON_EDIT_PAGES" => "Hide pages this group cannot view or edit",
               "SIMPLIFY_HIDE_EDIt_TREE" => "Hide the Edit Tree button",
               "SIMPLIFY_HIDE_ADD_NEW" => "Hide the Add New button",
 			  "SIMPLIFY_HIDE_MULTI_SELECTION" => "Hide the Multi-selection button",
 			  "SIMPLIFY_HIDE_FILTER" => "Hide the Filter panel",
-	  		  "SIMPLIFY_DRAGGABLE_OFF" => "NOT IMPLEMENTED: Turn off drag & drop reordering",
+	  		  "SIMPLIFY_DRAGGABLE_OFF" => "Turn off drag & drop reordering",
 		  ),
 
 		  "Security" => array (
