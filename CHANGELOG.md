@@ -1,5 +1,11 @@
 ##Simplify Change Log##
 
+1.3.0
+ *
+
+1.2.0
+ *
+
 1.1.0
  * Initial SilverStripe 3.x support
 
