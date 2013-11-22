@@ -18,7 +18,8 @@ class SimplifyPermissionProvider implements PermissionProvider {
 		  "Global" => array(
 			  "SIMPLIFY_DISABLED" => "Disable all Simplify permissions",
 			  "SIMPLIFY_HIDE_HELP" => "Hide the Help menu",
-			  "SIMPLIFY_HIDE_LOGO" => "Hide the logo"
+			  "SIMPLIFY_HIDE_LOGO" => "Hide the logo",
+			  "SIMPLIFY_HIDE_SUBSITES_DROP" => "Hide the Subsites dropdown"
 		  ),
 		  
 		  "Pages Tree" => array(
