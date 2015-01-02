@@ -78,16 +78,12 @@ class SimplifyDataObjectDecorator extends SiteTreeExtension {
 	 * 
 	 */
 	public function markingClasses() {
-		$classes = "";
-		
-		//Copy of markingClasses from Hierarchy.php (which extends DataObjectDecorator)
-		if(!$this->owner->isExpanded()) {
-			$classes .= " unexpanded";
-		}
-		if(!$this->owner->isTreeOpened()) {
-			$classes .= " closed";
-		}
-		
+		//Every DataObject has the Hierarchy extension attached to it,
+		//call its markingClasses() method first to determine $classes
+		$hierarchyExtension = $this->owner->getExtensionInstance('Hierarchy');
+		$hierarchyExtension->setOwner($this->owner);
+		$classes = $hierarchyExtension->markingClasses();
+
 		//Hide pages that have been selected in the top level of the Simplify fields tree -
 		//These will be where the field = page, ie; HidePage = HideName
 		$hideThisPage = DataObject::get("SimplifyPermission", 
